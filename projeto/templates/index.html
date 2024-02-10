@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+   <meta charset="UTF-8">
+    <title>Formulário Dinâmico</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <style>
+        /* Estilos adicionais */
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(106deg, #0C1E40 3.95%, #480000 100%);
+            }
+        .container {
+            max-width: 800px; /* Ajuste conforme necessário */
+            width: 100%;
+            padding: 20px;
+            border-radius: 31px;
+            background: rgba(149, 149, 149, 0.13);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        /* Outros estilos */
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            display: none;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-control {
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center mb-4">Formulário de Operações PMCE</h2>
+       
+    <form id="dataserv" action="/submit" method="post" novalidate>
+        <div class="custom-form-group">
+            <label for="dataHora">SELECIONE A DATA E HORA DO TURNO:</label>
+            <input type="datetime-local" class="form-control" id="dataHora" name="dataHora" required>
+        </div>
+        <div class="form-group">
+            <label for="horarioInicio">HORÁRIO DE INÍCIO DO TURNO:</label>
+            <input type="time" id="horarioInicio" name="horarioInicio" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="horarioFim">HORÁRIO DE FINALIZAÇÃO DO TURNO:</label>
+            <input type="time" id="horarioFim" name="horarioFim" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="unidadeOperacional">SELECIONE A UNIDADE OPERACIONAL:</label>
+            <select id="unidadeOperacional" name="unidadeOperacional" class="form-control" required>
+                <option value="">Selecione uma opção</option>
+                <option value="">-Selecione-</option>
+                <option value="CPE">CPE</option>
+                <option value="CPCHOQUE">CPCHOQUE</option>
+                <option value="CPRAIO">CPRAIO</option>
+                <option value="COPAC">COPAC</option>
+                <option value="Comando-Geral">Comando-Geral</option>
+                <option value="Subcomando-Geral">Subcomando-Geral</option>
+                <option value="DPGI">DPGI</option>
+                <option value="AGCG">AGCG</option>
+                <option value="ASSEJUR">ASSEJUR</option>
+                <option value="ASCOM">ASCOM</option>
+                <option value="ASSINT">ASSINT</option>
+                <option value="ASCOUV">ASCOUV</option>
+                <option value="CGO">CGO</option>
+                <option value="1º CRPM">1º CRPM</option>
+                <option value="5º BPM">5º BPM</option>
+                <option value="6º BPM">6º BPM</option>
+                <option value="8º BPM">8º BPM</option>
+                <option value="16º BPM">16º BPM</option>
+                <option value="17º BPM">17º BPM</option>
+                <option value="18º BPM">18º BPM</option>
+                <option value="19º BPM">19º BPM</option>
+                <option value="20º BPM">20º BPM</option>
+                <option value="21º BPM">21º BPM</option>
+                <option value="22º BPM">22º BPM</option>
+                <option value="2º CRPM">2º CRPM</option>
+                <option value="12º BPM">12º BPM</option>
+                <option value="14º BPM">14º BPM</option>
+                <option value="15º BPM">15º BPM</option>
+                <option value="23º BPM">23º BPM</option>
+                <option value="24º BPM">24º BPM</option>
+                <option value="25º BPM">25º BPM</option>
+                <option value="3º CRPM">3º CRPM</option>
+                <option value="3º BPM">3º BPM</option>
+                <option value="4º BPM">4º BPM</option>
+                <option value="7º BPM">7º BPM</option>
+                <option value="11º BPM">11º BPM</option>
+                <option value="1ª CIPM3º CRPM">1ª CIPM3º CRPM</option>
+                <option value="2ª CIPM3º CRPM">2ª CIPM3º CRPM</option>
+                <option value="3ª CIPM3º CRPM">3ª CIPM3º CRPM</option>
+                <option value="4º CRPM/">4º CRPM/</option>
+                <option value="1º BPM">1º BPM</option>
+                <option value="1ª Cia 1º BPM">1ª Cia 1º BPM</option>
+                <option value="2ª Cia/1º BPM">2ª Cia/1º BPM</option>
+                <option value="2º BPM">2º BPM</option>
+                <option value="1ª Cia/2º BPM">1ª Cia/2º BPM</option>
+                <option value="2ª Cia/2º BPM">2ª Cia/2º BPM</option>
+                <option value="3ª Cia/2º BPM">3ª Cia/2º BPM</option>
+                <option value="9º BPM">9º BPM</option>
+                <option value="1ª Cia/9º BPM">1ª Cia/9º BPM</option>
+                <option value="2ª Cia/9º BPM">2ª Cia/9º BPM</option>
+                <option value="3ª Cia/9º BPM">3ª Cia/9º BPM</option>
+                <option value="10º BPM">10º BPM</option>
+                <option value="13º BPM">13º BPM</option>
+                <option value="1ª Cia/13º BPM">1ª Cia/13º BPM</option>
+                <option value="1ª CIPM4ºCRPM">1ª CIPM4ºCRPM</option>
+                <option value="2ª CIPM4ºCRPM">2ª CIPM4ºCRPM</option>
+                <option value="3ª CIPM4ºCRPM">3ª CIPM4ºCRPM</option>
+                <option value="4ª CIPM4ºCRPM">4ª CIPM4ºCRPM</option>
+                <option value="5ª CIPM4ºCRPM">5ª CIPM4ºCRPM</option>
+                <option value="RPMONT">RPMONT</option>
+                <option value="1ª Esq/RPMONT">1ª Esq/RPMONT</option>
+                <option value="2ª Esq/RPMONT">2ª Esq/RPMONT</option>
+                <option value="BPMA">BPMA</option>
+                <option value="BPTUR">BPTUR</option>
+                <option value="BPRE">BPRE</option>
+                <option value="1ª Cia/BPGEP">1ª Cia/BPGEP</option>
+                <option value="COTAM">COTAM</option>
+                <option value="BPCHOQUE">BPCHOQUE</option>
+                <option value="BOPE">BOPE</option>
+                <option value="BEPI">BEPI</option>
+                <option value="1ª Cia/BEPI">1ª Cia/BEPI</option>
+                <option value="2ª Cia/ BEPI">2ª Cia/ BEPI</option>
+                <option value="1º BPRAIO">1º BPRAIO</option>
+                <option value="2ª Cia/ 1º BPRAIO">2ª Cia/ 1º BPRAIO</option>
+                <option value="2º BPRAIO">2º BPRAIO</option>
+                <option value="3º BPRAIO">3º BPRAIO</option>
+                <option value="4º BPRAIO">4º BPRAIO</option>
+                <option value="5º BPRAIO">5º BPRAIO</option>
+                <option value="QCG">QCG</option>
+                <option value="1ª CPG">1ª CPG</option>
+                <option value="2ª CPG">2ª CPG</option>
+                <option value="3ª CPG">3ª CPG</option>
+                <option value="CCS">CCS</option>
+                <option value="CBMPM">CBMPM</option>
+                <option value="BSP">BSP</option>
+                <option value="1ª Cia/BSP">1ª Cia/BSP</option>
+                <option value="2ª Cia/BSP">2ª Cia/BSP</option>
+                <option value="CPJM">CPJM</option>
+                <option value="CODIP">CODIP</option>
+                <option value="COLOG">COLOG</option>
+                <option value="COAFI">COAFI</option>
+                <option value="CGP">CGP</option>
+                <option value="CCPM">CCPM</option>
+                <option value="1º CPMGEF">1º CPMGEF</option>
+                <option value="2º CPMCHMJ">2º CPMCHMJ</option>
+                <option value="3º CPMTM">3º CPMTM</option>
+                <option value="4º CPMMJP">4º CPMMJP</option>
+                <option value="CSASR">CSASR</option>
+                <option value="COGEPRO">COGEPRO</option>
+                <option value="BPGEP">BPGEP</option>
+                <option value="COGEI">COGEI</option>
+            </select>
+        </div>
+        <div>
+            <table>
+                <tr>
+                    <th colspan="4">MODALIDADE DE POLICIAMENTO PRESENTE</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th>SIM</th>
+                    <th>NÃO</th>
+                    <th>QUANTIDADE</th>
+                
+                </tr>
+                <tr>
+                        <td class="required">VIATURA</td>
+                        <td class="radio-group"><input type="radio" name="viatura_radio" value="SIM" onclick="toggleQty('viatura', true)"></td>
+                        <td class="radio-group"><input type="radio" name="viatura_radio" value="NÃO" onclick="toggleQty('viatura_qty', false)"></td>
+                        <td><input type="number" id="viatura_qty" name="viatura" style="display:table;"></td>
+                    </tr>
+                    <tr>
+                        <td class="required">MOTOS</td>
+                        <td class="radio-group"><input type="radio" name="motos_radio" value="SIM" onclick="toggleQty('motos', true)"></td>
+                        <td class="radio-group"><input type="radio" name="motos_radio" value="NÃO" onclick="toggleQty('motos', false)"></td>
+                        <td><input type="number" id="motos" name="motos" style="display:table;"></td>
+                    </tr>
+                    <tr>
+                        <td class="required">BASE MÓVEL</td>
+                        <td class="radio-group"><input type="radio" name="basemovel_radio" value="SIM" onclick="toggleQty('basemovel', true)"></td>
+                        <td class="radio-group"><input type="radio" name="basemovel_radio" value="NÃO" onclick="toggleQty('basemovel', false)"></td>
+                        <td><input type="number" id="basemovel" name="basemovel" style="display:block;"></td>
+                    </tr>
+                    <tr>
+                        <td class="required">BASE FIXA</td>
+                        <td class="radio-group"><input type="radio" name="basefixa_radio" value="SIM" onclick="toggleQty('basefixa', true)"></td>
+                        <td class="radio-group"><input type="radio" name="basefixa_radio" value="NÃO" onclick="toggleQty('basefixa', false)"></td>
+                        <td><input type="number" id="basefixa" name="basefixa" style="display:flexbox;"></td>
+                    </tr>
+                    <tr>
+                        <td class="required">POLICIAMENTO MONTADO</td>
+                        <td class="radio-group"><input type="radio" name="montado_radio" value="SIM" onclick="toggleQty('montado', true)"></td>
+                        <td class="radio-group"><input type="radio" name="montado_radio" value="NÃO" onclick="toggleQty('montado', false)"></td>
+                        <td><input type="number" id="montado" name="montado" style="display:flexbox;"></td>
+                    </tr>
+                    <tr>
+                        <td class="required">OUTROS</td>
+                        <td class="radio-group"><input type="radio" name="outros_radio" value="SIM" onclick="toggleQty('outros', true)"></td>
+                        <td class="radio-group"><input type="radio" name="outros_radio" value="NÃO" onclick="toggleQty('outros', false)"></td>
+                        <td><input type="number" id="outros" name="outros" style="display:none;"></td>
+                    </tr>
+            </table>
+        <div class="form-group">
+            <label for="totalPoliciais">Quantos policiais estão presentes, no total?</label>
+            <input type="number" id="totalPoliciais" name="totalPoliciais" class="form-control" required>
+    
+            <button type="button" id="submitBtn" class="btn btn-primary">Enviar</button>
+            
+            <div id="questionarioDetalhes" style="display: none;">
+
+        </div>
+    </form>
+    <script>
+    window.toggleQty = function(id, show) {
+        var qtyField = $('#' + id);
+        if (show) {
+            qtyField.show();
+        } else {
+            qtyField.hide().val(''); // Esconde e limpa o valor do campo
+        }
+    };
+
+    $(document).ready(function() {
+        // Inicializa o datepicker para o campo dataHora
+        $('#dataHora').datepicker({
+            format: "dd/mm/yyyy",
+            language: "pt-BR",
+            autoclose: true,
+            todayHighlight: true
+        });
+
+        $('input[type="radio"]').change(function() {
+            var radioName = $(this).attr("name"); 
+            var showField = $(this).val() === 'SIM'; 
+            var fieldId = '#' + radioName.replace('_radio', '') + '_qty';
+
+            if(showField) {
+                $(fieldId).show();
+            } else {
+                $(fieldId).val('').hide();
+            }
+        });
+
+        // Submissão do formulário inicial
+        $('#submitBtn').click(function(e) {
+            e.preventDefault(); // Impede o recarregamento da página
+
+            var isValid = true;
+            var errorMessage = "Por favor, preencha todos os campos obrigatórios:";
+
+            // Validação do formulário
+            $('#dataserv .form-control[required]').each(function() {
+                var $this = $(this);
+                if ($this.val() === '') {
+                    isValid = false;
+                    $this.css('border', '1px solid red');
+                    errorMessage += "\n" + $this.prev('label').text();
+                } else {
+                    $this.css('border', '');
+                }
+            });
+
+            if (!isValid) {
+                alert(errorMessage);
+                $('.error-message').show().text(errorMessage);
+                return; 
+            }
+            $('.error-message').hide();
+
+            $.ajax({
+                url: '/alguma_rota.html', 
+                data: formData,
+                type: 'POST',
+                url: '/submit', 
+                
+                data: $('#dataserv').serialize(),
+                success: function(response) {
+                    if (response.mostrarQuestionario) {
+                        $('#questionarioDetalhes').show();
+                    } else {
+                        console.error('Erro no envio do formulário:', response.error || 'Erro desconhecido.');
+                    }
+                },
+                success: function(response) {
+                    if (response.mostrarQuestionario) {
+                        $('#questionarioDetalhes').show();
+                    } else {
+                        console.error('Erro no envio do formulário:', response.error || 'Erro desconhecido.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert('Erro ao enviar o formulário: ' + error);
+
+                window.location.href = `/proximaPagina?totalPoliciais=${totalPoliciais}`;
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>
